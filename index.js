@@ -42,8 +42,35 @@ class Airplane {
 */
 
 class Person {
+  constructor(name, age){
+    this.name = name,
+    this.age = age,
+    this.stomach = [];
+  }
+
+  eat(edible){
+    if (this.stomach.length < 10){
+    this.stomach.push(edible);
+    }
+  }
   
+  poop(){
+    this.stomach = [];
+  }
+
+  toString(){
+    return `${this.name}, ${this.age}`;
+  }
+
 }
+const mason = new Person('Mason', 26);
+
+// mason.eat('Tacos');
+// console.log(mason.stomach);
+// mason.poop();
+// console.log(mason.stomach);
+// console.log(mason.toString());
+
 
 /*
   TASK 2
@@ -76,8 +103,24 @@ class Car {
         + {name} and {location} of course come from the instance's own properties.
 */
 class Lambdasian {
-  
+  constructor(att){
+    this.name = att.name;
+    this.age = att.age;
+    this.location = att.location;
+  }
+
+  speak(){
+    return `Hello my name is ${this.name}, I am from ${this.location}`;
+  }
 }
+
+const chance = new Lambdasian({
+  name: 'Chance',
+  age: 26,
+  location: 'Albertville',
+});
+
+// console.log(chance.speak())
 
 /*
   TASK 4
@@ -93,9 +136,35 @@ class Lambdasian {
         + `demo` receives a `subject` string as an argument and returns the phrase 'Today we are learning about {subject}' where subject is the param passed in.
         + `grade` receives a `student` object and a `subject` string as arguments and returns '{student.name} receives a perfect score on {subject}'
 */
-class Instructor {
+class Instructor extends Lambdasian {
+  constructor(att){
+    super(att);
+    this.specialty = att.specialty;
+    this.favLanguage = att.favLanguage;
+    this.catchPhrase = att.catchPhrase;
+  }
+
+  demo(subject){
+    return `Today we are learning about ${subject}`;
+  };
+
+  grade(student, subject){
+    return `${student.name} receives a perfect score on ${subject}`;
+  };
 
 }
+
+const richard = new Instructor({
+  name: 'Richard',
+  age: '?',
+  location: 'In front of computer.',
+  specialty: 'Being a coding God.',
+  favLanguage: 'JavaScript',
+  catchPhrase: 'I know yall are on the first task... but I need help on the last task'
+});
+
+// console.log(richard);
+
 /*
   TASK 5
     - Write a Student class extending Lambdasian.
@@ -111,8 +180,26 @@ class Instructor {
         + `PRAssignment` a method that receives a subject as an argument and returns `student.name has submitted a PR for {subject}`
         + `sprintChallenge` similar to PRAssignment but returns `student.name has begun sprint challenge on {subject}`
 */
-class Student {
-   
+class Student extends Lambdasian{
+   constructor(att){
+     super(att);
+    this.previousBackground = att.previousBackground;
+    this.className = att.className;
+    this.favSubjects = att.favSubjects;
+   };
+
+   listSubjects() {
+    return `Loving ${this.favSubjects}!`;
+   };
+
+   PRAssignment(subject) {
+    return `${this.name} has submitted a PR for ${subject}`;
+   };
+
+   sprintChallenge(subject) {
+    return `${this.name} has begun spring challenge on ${subject}`;
+   };
+
 }
 
 /*
@@ -128,8 +215,20 @@ class Student {
         + `standUp` a method that takes in a slack channel and returns `{name} announces to {channel}, @channel standy times!`
         + `debugsCode` a method that takes in a student object and a subject and returns `{name} debugs {student.name}'s code on {subject}`
 */
-class ProjectManager {
-   
+class ProjectManager extends Instructor{
+   constructor(att){
+    super(att);
+    this.gradClassName = att.gradClassName;
+    this.favInstructor = att.favInstructor;
+   };
+
+   standUp(slack){
+    return `${this.name} announces to ${slack}, @channel standy times!`;
+   };
+
+   debugsCode(subject){
+    return `${this.name} debugs ${student.name}'s code on ${subject}`;
+   };
 }
 /*
   STRETCH PROBLEM (no tests!)
