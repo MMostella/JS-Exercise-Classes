@@ -87,6 +87,28 @@ const mason = new Person('Mason', 26);
 */
 
 class Car {
+  constructor(model, milesPerGallon){
+    this.milesPerGallon = milesPerGallon;
+    this.model = model;
+    this.tank = 0;
+    this.odometer = 0;
+  };
+
+  fill(gallons){
+    return this.tank += gallons;
+  };
+
+  drive(distance){
+    const driveMiles = this.tank * this.milesPerGallon;
+    if (distance <= driveMiles){
+      this.odometer += distance;
+      this.tank = this.tank - (distance / this.milesPerGallon);
+    } else {
+      this.tank = 0;
+      this.odometer += driveMiles;
+      return `I ran out of fuel at ${this.odometer} miles`;
+    }
+  };
   
 }
 
@@ -226,7 +248,7 @@ class ProjectManager extends Instructor{
     return `${this.name} announces to ${slack}, @channel standy times!`;
    };
 
-   debugsCode(subject){
+   debugsCode(student, subject){
     return `${this.name} debugs ${student.name}'s code on ${subject}`;
    };
 }
